@@ -29,7 +29,7 @@ public class PrivateWarps extends JavaPlugin {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.reloadConfig();
-
+        //testy
         PluginManager pm = Bukkit.getPluginManager();
             pm.registerEvents(new PlayerListener(), this);
 
