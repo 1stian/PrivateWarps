@@ -1,0 +1,25 @@
+name: PrivateWarps
+version: 1.0
+author: GudfareN
+main: pro.homiecraft.PrivateWarps
+website: homiecraft.pro
+description: PrivateWarps provides warps for each individual player.
+
+commands:
+    privatewarps:
+        description: Prints information about the plugin!
+    padmin:
+        permission: PrivateWarps.admin
+        description: Admin commands for PrivateWarps. Type /padmin to see the options
+    pwarp:
+        permission: PrivateWarps.warp
+        description: Warps you to the specified warp if it exist!
+    psetwarp:
+        permission: PrivateWarps.setwarp
+        description: Sets a private warp
+    pdelwarp:
+        permission: PrivateWarps.delwarp
+        description: Deletes a warp that you specify!
+    pwarps:
+        permission: PrivateWarps.listwarps
+        description: List all warps available for you!
