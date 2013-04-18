@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.IOException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ellen Thing
@@ -29,7 +31,9 @@ public class PrivateWarps extends JavaPlugin {
         this.getConfig().options().copyDefaults(true);
         this.saveConfig();
         this.reloadConfig();
-        //testy
+
+        initMetrics();
+
         PluginManager pm = Bukkit.getPluginManager();
             pm.registerEvents(new PlayerListener(), this);
 
@@ -45,4 +49,13 @@ public class PrivateWarps extends JavaPlugin {
         this.getCommand("pwarps").setExecutor(new CommandListWarps());
     }
 
+    public void initMetrics(){
+        try {
+            Metrics metrics = new Metrics(this);
+
+            metrics.start();
+        } catch (IOException e) {
+            // Failed to submit the stats :-(
+        }
+    }
 }

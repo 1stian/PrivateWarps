@@ -22,7 +22,7 @@ public class CommandAdmin implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args){
         if (cmd.getName().equalsIgnoreCase("padmin")){
             if (args.length == 0){
-                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delwarp|setwarp|warp|listwarps|warplimit");
+                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delwarp|setwarp|warp|listwarps|warplimit|delay|cooldown");
             }else if(args.length > 1){
                 if (args[0].equalsIgnoreCase("delwarp")){
                     if (args.length < 3){
@@ -164,6 +164,40 @@ public class CommandAdmin implements CommandExecutor {
                         }
                     }else{
                         s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin warplimit <number>");
+                    }
+                }
+
+                if(args[0].equalsIgnoreCase("delay")){
+                    if (args.length == 2){
+                        String arg = args[1];
+                        if (Pattern.matches("[a-zA-Z]+", arg)){
+                            s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delay <number>");
+                        }else{
+                            PrivateWarps.pluginST.reloadConfig();
+                            PrivateWarps.pluginST.getConfig().set("PrivateWarps.Warps.Warp-Delay", Integer.parseInt(arg));
+                            PrivateWarps.pluginST.saveConfig();
+                            PrivateWarps.pluginST.reloadConfig();
+                            s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp Delay is now set to " + args[1] + " seconds");
+                        }
+                    }else{
+                        s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delay <number>");
+                    }
+                }
+
+                if(args[0].equalsIgnoreCase("cooldown")){
+                    if (args.length == 2){
+                        String arg = args[1];
+                        if (Pattern.matches("[a-zA-Z]+", arg)){
+                            s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin cooldown <number>");
+                        }else{
+                            PrivateWarps.pluginST.reloadConfig();
+                            PrivateWarps.pluginST.getConfig().set("PrivateWarps.Warps.Warp-Cooldown", Integer.parseInt(arg));
+                            PrivateWarps.pluginST.saveConfig();
+                            PrivateWarps.pluginST.reloadConfig();
+                            s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp Cooldown is now set to " + args[1] + " seconds");
+                        }
+                    }else{
+                        s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin cooldown <number>");
                     }
                 }
             }
