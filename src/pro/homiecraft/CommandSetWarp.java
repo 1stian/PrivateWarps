@@ -21,9 +21,9 @@ public class CommandSetWarp implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("psetwarp")){
             if (args.length == 1){
                 World cWorld = player.getWorld();
-                String warpName = args[0];
+                String warpName = args[0].toLowerCase();
 
-                if (WarpConfig.getWarpConfig(player.getName()).getString(warpName) == null){
+                if (WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null){
                     if (s.hasPermission("PrivateWarps.unlimited")){
                         double xLoc = player.getLocation().getX();
                         double yLoc = player.getLocation().getY();
@@ -33,25 +33,25 @@ public class CommandSetWarp implements CommandExecutor {
 
                         //Location warp = new Location(cWorld,xLoc, yLoc, zLoc, yaw, pitch);
 
-                        WarpConfig.reloadWarpConfig(player.getName());
+                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
-                        int count = WarpConfig.getWarpConfig(player.getName()).getInt("count");
+                        int count = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getInt("count");
                         count++;
 
-                        WarpConfig.getWarpConfig(player.getName()).set(warpName + ".x", xLoc);
-                        WarpConfig.getWarpConfig(player.getName()).set(warpName + ".y", yLoc);
-                        WarpConfig.getWarpConfig(player.getName()).set(warpName + ".z", zLoc);
-                        WarpConfig.getWarpConfig(player.getName()).set(warpName + ".yaw", yaw);
-                        WarpConfig.getWarpConfig(player.getName()).set(warpName + ".pitch", pitch);
-                        WarpConfig.getWarpConfig(player.getName()).set("count", count);
-                        WarpConfig.saveWarpConfig(player.getName());
-                        WarpConfig.reloadWarpConfig(player.getName());
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".x", xLoc);
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".y", yLoc);
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".z", zLoc);
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".yaw", yaw);
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".pitch", pitch);
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set("count", count);
+                        WarpConfig.saveWarpConfig(player.getName().toLowerCase());
+                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
                         player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp: " + warpName + " has ben set!");
                     }else{
-                        WarpConfig.reloadWarpConfig(player.getName());
+                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
                         int maxcount = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Maximum-Allowed-Warps");
-                        if (WarpConfig.getWarpConfig(player.getName()).getInt("count") == maxcount || WarpConfig.getWarpConfig(player.getName()).getInt("count") > maxcount){
+                        if (WarpConfig.getWarpConfig(player.getName().toLowerCase()).getInt("count") == maxcount || WarpConfig.getWarpConfig(player.getName()).getInt("count") > maxcount){
                             player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You have reached the maximum allowed warps!");
                         }else{
                             double xLoc = player.getLocation().getX();
@@ -62,20 +62,20 @@ public class CommandSetWarp implements CommandExecutor {
 
                             //Location warp = new Location(cWorld,xLoc, yLoc, zLoc, yaw, pitch);
 
-                            WarpConfig.reloadWarpConfig(player.getName());
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
-                            int count = WarpConfig.getWarpConfig(player.getName()).getInt("count");
+                            int count = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getInt("count");
                             count++;
 
-                            WarpConfig.getWarpConfig(player.getName()).set(warpName + ".x", xLoc);
-                            WarpConfig.getWarpConfig(player.getName()).set(warpName + ".y", yLoc);
-                            WarpConfig.getWarpConfig(player.getName()).set(warpName + ".z", zLoc);
-                            WarpConfig.getWarpConfig(player.getName()).set(warpName + ".yaw", yaw);
-                            WarpConfig.getWarpConfig(player.getName()).set(warpName + ".pitch", pitch);
-                            WarpConfig.getWarpConfig(player.getName()).set(warpName + ".world", player.getWorld().getName());
-                            WarpConfig.getWarpConfig(player.getName()).set("count", count);
-                            WarpConfig.saveWarpConfig(player.getName());
-                            WarpConfig.reloadWarpConfig(player.getName());
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".x", xLoc);
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".y", yLoc);
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".z", zLoc);
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".yaw", yaw);
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".pitch", pitch);
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".world", player.getWorld().getName());
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set("count", count);
+                            WarpConfig.saveWarpConfig(player.getName().toLowerCase());
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
                             player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp: " + warpName + " has ben set!");
                         }

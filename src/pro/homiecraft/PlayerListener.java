@@ -1,13 +1,11 @@
 package pro.homiecraft;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 
@@ -20,16 +18,16 @@ import java.util.HashMap;
  */
 public class PlayerListener implements Listener {
 
-    public static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
+    //public static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
 
         Player player = e.getPlayer();
 
         BukkitScheduler task = PrivateWarps.pluginST.getServer().getScheduler();
-        if(taskIDs.containsKey(player.getName())){
-            if(task.isQueued(taskIDs.get(player.getName()))){
-                task.cancelTask(taskIDs.get(player.getName()));
+        if(CommandWarp.taskIDs.containsKey(player.getName())){
+            if(task.isQueued(CommandWarp.taskIDs.get(player.getName()))){
+                task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                 player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
             }
         }

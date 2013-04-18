@@ -20,20 +20,20 @@ public class CommandDeleteWarp implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("pdelwarp")){
             Player player = (Player) s;
             if (args.length == 1){
-                String warpName = args[0];
+                String warpName = args[0].toLowerCase();
 
-                if (WarpConfig.getWarpConfig(player.getName()).getString(warpName) == null){
+                if (WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null){
                     player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp: " + warpName + " does not exist!");
                 }else{
-                    WarpConfig.reloadWarpConfig(player.getName());
+                    WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
-                    int count = WarpConfig.getWarpConfig(player.getName()).getInt("count");
+                    int count = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getInt("count");
                     count--;
 
-                    WarpConfig.getWarpConfig(player.getName()).set(warpName, null);
-                    WarpConfig.getWarpConfig(player.getName()).set("count", count);
-                    WarpConfig.saveWarpConfig(player.getName());
-                    WarpConfig.reloadWarpConfig(player.getName());
+                    WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName, null);
+                    WarpConfig.getWarpConfig(player.getName().toLowerCase()).set("count", count);
+                    WarpConfig.saveWarpConfig(player.getName().toLowerCase());
+                    WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
                     player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp: " + warpName + " has ben deleted!");
                 }

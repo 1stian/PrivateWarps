@@ -29,8 +29,8 @@ public class CommandAdmin implements CommandExecutor {
                         s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delwarp PlayerName warpName");
                     }
                     if(args.length == 3){
-                        String pName = args[1];
-                        String warpName = args[2];
+                        String pName = args[1].toLowerCase();
+                        String warpName = args[2].toLowerCase();
 
                         File playerConfig = new File(PrivateWarps.pluginST.getDataFolder() + "/data/" + pName + ".yml");
                         if (!playerConfig.exists()){
@@ -58,8 +58,8 @@ public class CommandAdmin implements CommandExecutor {
                         s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin setwarp PlayerName warpName");
                     }
                     if(args.length == 3){
-                        String pName = args[1];
-                        String warpName = args[2];
+                        String pName = args[1].toLowerCase();
+                        String warpName = args[2].toLowerCase();
 
                         File playerConfig = new File(PrivateWarps.pluginST.getDataFolder() + "/data/" + pName + ".yml");
                         if (!playerConfig.exists()){
@@ -84,6 +84,7 @@ public class CommandAdmin implements CommandExecutor {
                                 WarpConfig.getWarpConfig(pName).set(warpName + ".z", zLoc);
                                 WarpConfig.getWarpConfig(pName).set(warpName + ".yaw", yaw);
                                 WarpConfig.getWarpConfig(pName).set(warpName + ".pitch", pitch);
+                                WarpConfig.getWarpConfig(pName).set(warpName + ".world", player.getWorld().getName());
                                 WarpConfig.getWarpConfig(pName).set("count", count);
                                 WarpConfig.saveWarpConfig(pName);
                                 WarpConfig.reloadWarpConfig(pName);
@@ -98,8 +99,8 @@ public class CommandAdmin implements CommandExecutor {
                         s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin warp PlayerName warpName");
                     }
                     if(args.length == 3){
-                        String pName = args[1];
-                        String warpName = args[2];
+                        String pName = args[1].toLowerCase();
+                        String warpName = args[2].toLowerCase();
 
                         File playerConfig = new File(PrivateWarps.pluginST.getDataFolder() + "/data/" + pName + ".yml");
                         if (!playerConfig.exists()){
@@ -117,7 +118,7 @@ public class CommandAdmin implements CommandExecutor {
 
                                 String yaw = WarpConfig.getWarpConfig(pName).getString(warpName + ".yaw");
                                 String pitch = WarpConfig.getWarpConfig(pName).getString(warpName + ".pitch");
-                                String world = WarpConfig.getWarpConfig(player.getName()).getString(warpName + ".world");
+                                String world = WarpConfig.getWarpConfig(pName).getString(warpName + ".world");
 
                                 Float fYaw = Float.parseFloat(yaw);
                                 Float fPitch = Float.parseFloat(pitch);
@@ -135,7 +136,7 @@ public class CommandAdmin implements CommandExecutor {
                         s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin listwarps PlayerName");
                     }
                     if(args.length == 2){
-                        String pName = args[1];
+                        String pName = args[1].toLowerCase();
 
                         File playerConfig = new File(PrivateWarps.pluginST.getDataFolder() + "/data/" + pName + ".yml");
                         if (!playerConfig.exists()){

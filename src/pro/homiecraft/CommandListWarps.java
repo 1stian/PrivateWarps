@@ -18,7 +18,7 @@ public class CommandListWarps implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args){
         if (cmd.getName().equalsIgnoreCase("pwarps")){
             Player player = (Player) s;
-            String warpList = WarpConfig.getWarpConfig(player.getName()).getKeys(false).toString();
+            String warpList = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getKeys(false).toString();
             String rawList;
             rawList = warpList.replace("count", "");
             player.sendMessage("Warps: " + ChatColor.AQUA + rawList);

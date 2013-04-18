@@ -34,6 +34,7 @@ public class PrivateWarps extends JavaPlugin {
 
         initMetrics();
 
+
         PluginManager pm = Bukkit.getPluginManager();
             pm.registerEvents(new PlayerListener(), this);
 
