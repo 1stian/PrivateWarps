@@ -22,7 +22,7 @@ public class CommandAdmin implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args){
         if (cmd.getName().equalsIgnoreCase("padmin")){
             if (args.length == 0){
-                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delwarp|setwarp|warp|listwarps|warplimit|delay|cooldown");
+                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delwarp|setwarp|warp|listwarps|warplimit|delay|cooldown|cmove");
             }else if(args.length > 1){
                 if (args[0].equalsIgnoreCase("delwarp")){
                     if (args.length < 3){
@@ -199,6 +199,23 @@ public class CommandAdmin implements CommandExecutor {
                         }
                     }else{
                         s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin cooldown <number>");
+                    }
+                }
+
+                if(args[0].equalsIgnoreCase("cmove")){
+                    if (args.length == 2){
+                        String arg = args[1];
+                        if (!(arg.equalsIgnoreCase("true") || arg.equalsIgnoreCase("false"))){
+                            s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin cmove <true|false>");
+                        }else{
+                            PrivateWarps.pluginST.reloadConfig();
+                            PrivateWarps.pluginST.getConfig().set("PrivateWarps.settings.Cancel-Warp-On-Player-Move", Boolean.parseBoolean(arg));
+                            PrivateWarps.pluginST.saveConfig();
+                            PrivateWarps.pluginST.reloadConfig();
+                            s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp cancel on move is now set to " + args[1]);
+                        }
+                    }else{
+                        s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin cmove <true|false>");
                     }
                 }
             }

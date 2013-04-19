@@ -20,7 +20,7 @@ import java.util.HashMap;
  */
 public class CommandWarp implements CommandExecutor {
 
-    public static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
+    static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
 
     HashMap<String, Long> warpCooldown = new HashMap<String, Long>();
 

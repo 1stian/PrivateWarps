@@ -7,8 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitScheduler;
 
-import java.util.HashMap;
-
 /**
  * Created with IntelliJ IDEA.
  * User: Ellen Thing
@@ -25,10 +23,14 @@ public class PlayerListener implements Listener {
         Player player = e.getPlayer();
 
         BukkitScheduler task = PrivateWarps.pluginST.getServer().getScheduler();
-        if(CommandWarp.taskIDs.containsKey(player.getName())){
-            if(task.isQueued(CommandWarp.taskIDs.get(player.getName()))){
-                task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
-                player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
+        boolean pMove = PrivateWarps.pluginST.getConfig().getBoolean("PrivateWarps.settings.Cancel-Warp-On-Player-Move", true);
+        if(pMove){
+            if(CommandWarp.taskIDs.containsKey(player.getName())){
+                if(task.isQueued(CommandWarp.taskIDs.get(player.getName()))){
+                    task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
+                    CommandWarp.taskIDs.remove(player.getName());
+                    player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
+                }
             }
         }
     }
