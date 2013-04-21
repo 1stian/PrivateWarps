@@ -1,5 +1,5 @@
 name: PrivateWarps
-version: 1.2
+version: 1.2.1
 author: GudfareN
 main: pro.homiecraft.PrivateWarps
 website: homiecraft.pro
@@ -16,6 +16,10 @@ commands:
         aliases: pw
         permission: PrivateWarps.warp
         description: Warps you to the specified warp if it exist!
+    pswarp:
+        aliases: psw
+        permission: PrivateWarps.warp.other
+        description: Warp to another players warp(If it is shared to you)
     psetwarp:
         aliases: pset
         permission: PrivateWarps.setwarp
