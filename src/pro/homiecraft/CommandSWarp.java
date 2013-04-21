@@ -21,7 +21,7 @@ public class CommandSWarp implements CommandExecutor {
                 String warpName = args[0].toLowerCase();
                 String pName = args[1].toLowerCase();
 
-
+                //testy
             }
         }
         return true;
