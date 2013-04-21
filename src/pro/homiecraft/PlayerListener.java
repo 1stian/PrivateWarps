@@ -3,6 +3,7 @@ package pro.homiecraft;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -16,8 +17,8 @@ import org.bukkit.scheduler.BukkitScheduler;
  */
 public class PlayerListener implements Listener {
 
-    @EventHandler
-    public void onPlayerMove(PlayerMoveEvent e){
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerMove(PlayerMoveEvent e) {
 
         Player player = e.getPlayer();
 
@@ -28,15 +29,15 @@ public class PlayerListener implements Listener {
         double locY = player.getLocation().getY();
         double locZ = player.getLocation().getZ();
 
-        if (CommandWarp.pLoc.containsKey(player.getName() + "x") || CommandWarp.pLoc.containsKey(player.getName() + "y" ) || CommandWarp.pLoc.containsKey(player.getName() + "z" )){
+        if (CommandWarp.pLoc.containsKey(player.getName() + "x") || CommandWarp.pLoc.containsKey(player.getName() + "y") || CommandWarp.pLoc.containsKey(player.getName() + "z")) {
             double plocX = CommandWarp.pLoc.get(player.getName() + "x");
             double plocY = CommandWarp.pLoc.get(player.getName() + "y");
             double plocZ = CommandWarp.pLoc.get(player.getName() + "z");
 
-            if (!(locX == plocX)){
-                if(pMove){
-                    if(CommandWarp.taskIDs.containsKey(player.getName())){
-                        if(task.isQueued(CommandWarp.taskIDs.get(player.getName()))){
+            if (!(locX == plocX)) {
+                if (pMove) {
+                    if (CommandWarp.taskIDs.containsKey(player.getName())) {
+                        if (task.isQueued(CommandWarp.taskIDs.get(player.getName()))) {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
@@ -45,10 +46,10 @@ public class PlayerListener implements Listener {
                 }
             }
 
-            if (!(locY == plocY)){
-                if(pMove){
-                    if(CommandWarp.taskIDs.containsKey(player.getName())){
-                        if(task.isQueued(CommandWarp.taskIDs.get(player.getName()))){
+            if (!(locY == plocY)) {
+                if (pMove) {
+                    if (CommandWarp.taskIDs.containsKey(player.getName())) {
+                        if (task.isQueued(CommandWarp.taskIDs.get(player.getName()))) {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
@@ -57,10 +58,10 @@ public class PlayerListener implements Listener {
                 }
             }
 
-            if (!(locZ == plocZ)){
-                if(pMove){
-                    if(CommandWarp.taskIDs.containsKey(player.getName())){
-                        if(task.isQueued(CommandWarp.taskIDs.get(player.getName()))){
+            if (!(locZ == plocZ)) {
+                if (pMove) {
+                    if (CommandWarp.taskIDs.containsKey(player.getName())) {
+                        if (task.isQueued(CommandWarp.taskIDs.get(player.getName()))) {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");

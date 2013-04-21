@@ -17,14 +17,14 @@ public class PrivateWarps extends JavaPlugin {
 
     public static PrivateWarps pluginST;
 
-    public void onDisable(){
+    public void onDisable() {
 
     }
 
-    public void onEnable(){
+    public void onEnable() {
         pluginST = this;
 
-        if(!getDataFolder().exists()){
+        if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
         }
 
@@ -36,22 +36,23 @@ public class PrivateWarps extends JavaPlugin {
 
 
         PluginManager pm = Bukkit.getPluginManager();
-            pm.registerEvents(new PlayerListener(), this);
+        pm.registerEvents(new PlayerListener(), this);
 
         getCommands();
     }
 
-    public void getCommands(){
+    public void getCommands() {
         this.getCommand("privatewarps").setExecutor(new CommandPrivateWarps());
         this.getCommand("padmin").setExecutor(new CommandAdmin());
         this.getCommand("psetwarp").setExecutor(new CommandSetWarp());
         this.getCommand("pwarp").setExecutor(new CommandWarp());
+        this.getCommand("pswarp").setExecutor(new CommandSWarp());
         this.getCommand("pdelwarp").setExecutor(new CommandDeleteWarp());
         this.getCommand("pwarps").setExecutor(new CommandListWarps());
         this.getCommand("pshare").setExecutor(new CommandShare());
     }
 
-    public void initMetrics(){
+    public void initMetrics() {
         try {
             Metrics metrics = new Metrics(this);
 
