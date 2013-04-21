@@ -18,63 +18,71 @@ import java.util.List;
  */
 public class CommandShare implements CommandExecutor {
 
-    public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args){
-        if(cmd.getName().equalsIgnoreCase("pshare")){
+    public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("pshare")) {
             Player player = (Player) s;
-            if (args.length < 3){
-                player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /pshare add|remove <warpName> <playerName>");
-            }else{
-                if (args[0].equalsIgnoreCase("add")){
-                    String warpName = args[1].toLowerCase();
-                    String pName = args[2].toLowerCase();
+            if (args.length < 3) {
+                player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /pshare add|remove <playerName> <warpName>");
+            } else {
+                if (args[0].equalsIgnoreCase("add")) {
+                    String warpName = args[2].toLowerCase();
+                    String pName = args[1].toLowerCase();
 
-                    if(!WarpConfig.getWarpConfig(player.getName().toLowerCase()).contains(warpName + ".Shared")){
-                        ArrayList<String> shared = new ArrayList<String>();
-                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
-                        WarpConfig.saveWarpConfig(player.getName().toLowerCase());
-                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-                    }
+                    if (!(WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null)){
+                        if (!WarpConfig.getWarpConfig(player.getName().toLowerCase()).contains(warpName + ".Shared")) {
+                            ArrayList<String> shared = new ArrayList<String>();
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
+                            WarpConfig.saveWarpConfig(player.getName().toLowerCase());
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
+                        }
 
-                    ArrayList<String> shareCheck = (ArrayList<String>)WarpConfig.getWarpConfig(player.getName().toLowerCase()).getList(warpName + ".Shared");
-                    if(shareCheck.contains(pName)){
-                        player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're already sharing warp: " + warpName + " with " + pName);
+                        ArrayList<String> shareCheck = (ArrayList<String>) WarpConfig.getWarpConfig(player.getName().toLowerCase()).getList(warpName + ".Shared");
+                        if (shareCheck.contains(pName)) {
+                            player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're already sharing warp: " + warpName + " with " + pName);
+                        } else {
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
+                            ArrayList<String> shared = new ArrayList<String>();
+                            shared.add(pName);
+
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
+                            WarpConfig.saveWarpConfig(player.getName().toLowerCase());
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
+
+                            player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're now sharing warp: " + warpName + " with " + pName);
+                        }
                     }else{
-                        WarpConfig.reloadWarpConfig(player.getName());
-                        ArrayList<String> shared = new ArrayList<String>();
-                        shared.add(pName);
-
-                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
-                        WarpConfig.saveWarpConfig(player.getName().toLowerCase());
-                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-
-                        player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're now sharing warp: " + warpName + " with " + pName);
+                        player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp does not exist!");
                     }
                 }
 
-                if (args[0].equalsIgnoreCase("remove")){
-                    String warpName = args[1].toLowerCase();
-                    String pName = args[2].toLowerCase();
+                if (args[0].equalsIgnoreCase("remove")) {
+                    String warpName = args[2].toLowerCase();
+                    String pName = args[1].toLowerCase();
 
-                    if(!WarpConfig.getWarpConfig(player.getName().toLowerCase()).contains(warpName + ".Shared")){
-                        ArrayList<String> shared = new ArrayList<String>();
-                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
-                        WarpConfig.saveWarpConfig(player.getName().toLowerCase());
-                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-                    }
+                    if (!(WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null)){
+                        if (!WarpConfig.getWarpConfig(player.getName().toLowerCase()).contains(warpName + ".Shared")) {
+                            ArrayList<String> shared = new ArrayList<String>();
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
+                            WarpConfig.saveWarpConfig(player.getName().toLowerCase());
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
+                        }
 
-                    ArrayList<String> shareCheck = (ArrayList<String>)WarpConfig.getWarpConfig(player.getName().toLowerCase()).getList(warpName + ".Shared");
-                    if(!shareCheck.contains(pName)){
-                        player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're not sharing warp: " + warpName + " with " + pName);
+                        ArrayList<String> shareCheck = (ArrayList<String>) WarpConfig.getWarpConfig(player.getName().toLowerCase()).getList(warpName + ".Shared");
+                        if (!shareCheck.contains(pName)) {
+                            player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're not sharing warp: " + warpName + " with " + pName);
+                        } else {
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
+                            ArrayList<String> shared = (ArrayList<String>) WarpConfig.getWarpConfig(player.getName().toLowerCase()).getList(warpName + ".Shared");
+                            shared.remove(pName);
+
+                            WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
+                            WarpConfig.saveWarpConfig(player.getName().toLowerCase());
+                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
+
+                            player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're no longer sharing warp: " + warpName + " with " + pName);
+                        }
                     }else{
-                        WarpConfig.reloadWarpConfig(player.getName());
-                        ArrayList<String> shared = (ArrayList<String>)WarpConfig.getWarpConfig(player.getName().toLowerCase()).getList(warpName + ".Shared");
-                        shared.remove(pName);
-
-                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".Shared", shared);
-                        WarpConfig.saveWarpConfig(player.getName().toLowerCase());
-                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-
-                        player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " You're no longer sharing warp: " + warpName + " with " + pName);
+                        player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp does not exist!");
                     }
                 }
             }
