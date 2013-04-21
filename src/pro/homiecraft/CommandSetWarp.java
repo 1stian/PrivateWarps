@@ -43,6 +43,7 @@ public class CommandSetWarp implements CommandExecutor {
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".z", zLoc);
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".yaw", yaw);
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".pitch", pitch);
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".world", player.getWorld().getName());
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set("count", count);
                         WarpConfig.saveWarpConfig(player.getName().toLowerCase());
                         WarpConfig.reloadWarpConfig(player.getName().toLowerCase());

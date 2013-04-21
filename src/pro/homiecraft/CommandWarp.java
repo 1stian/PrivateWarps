@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class CommandWarp implements CommandExecutor {
 
     static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
-
+    static HashMap<String, Double> pLoc = new HashMap<String, Double>();
     HashMap<String, Long> warpCooldown = new HashMap<String, Long>();
 
     public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args){
@@ -36,6 +36,11 @@ public class CommandWarp implements CommandExecutor {
                     s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp does not exist!");
                 }else{
                     int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
+
+                    pLoc.put(player.getName() + "x", player.getLocation().getX());
+                    pLoc.put(player.getName() + "y", player.getLocation().getY());
+                    pLoc.put(player.getName() + "z", player.getLocation().getZ());
+
                     if (!(configCD == 0)){
                         if(warpCooldown.containsKey(player.getName())){
                             if(System.currentTimeMillis() < warpCooldown.get(player.getName())){

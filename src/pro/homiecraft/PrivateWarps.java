@@ -48,6 +48,7 @@ public class PrivateWarps extends JavaPlugin {
         this.getCommand("pwarp").setExecutor(new CommandWarp());
         this.getCommand("pdelwarp").setExecutor(new CommandDeleteWarp());
         this.getCommand("pwarps").setExecutor(new CommandListWarps());
+        this.getCommand("pshare").setExecutor(new CommandShare());
     }
 
     public void initMetrics(){
