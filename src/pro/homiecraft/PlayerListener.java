@@ -16,7 +16,6 @@ import org.bukkit.scheduler.BukkitScheduler;
  */
 public class PlayerListener implements Listener {
 
-    //public static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
 
@@ -71,5 +70,4 @@ public class PlayerListener implements Listener {
             }
         }
     }
-
 }

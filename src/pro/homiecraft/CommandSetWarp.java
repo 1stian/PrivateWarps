@@ -31,7 +31,6 @@ public class CommandSetWarp implements CommandExecutor {
                         float yaw = player.getLocation().getYaw();
                         float pitch = player.getLocation().getPitch();
 
-                        //Location warp = new Location(cWorld,xLoc, yLoc, zLoc, yaw, pitch);
 
                         WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
@@ -61,7 +60,6 @@ public class CommandSetWarp implements CommandExecutor {
                             float yaw = player.getLocation().getYaw();
                             float pitch = player.getLocation().getPitch();
 
-                            //Location warp = new Location(cWorld,xLoc, yLoc, zLoc, yaw, pitch);
 
                             WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 

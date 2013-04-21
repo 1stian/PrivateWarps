@@ -81,23 +81,11 @@ public class CommandWarp implements CommandExecutor {
                                         player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
                                         player.teleport(targetLoc);
                                         Integer configCD2 = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
-                                        //String formatConfig = null;
-                                        //if(configCD2 > 9){
-                                        //    formatConfig = StringUtils.rightPad(configCD2.toString(), 5, "0");
-                                        //}else if(configCD2 < 10){
-                                        //    formatConfig = StringUtils.rightPad(configCD2.toString(), 4, "0");
-                                        //}else if(configCD2 > 99){
-                                        //    formatConfig = StringUtils.rightPad(configCD2.toString(), 6, "0");
-                                        //}
                                         int k = Integer.valueOf(String.valueOf(configCD2) + String.valueOf("000"));
-                                        //Integer FinalSum =  Integer.parseInt(formatConfig);
                                         long systemTime = System.currentTimeMillis() + k;
                                         warpCooldown.put(player.getName(), systemTime);
-                                        //player.sendMessage(formatConfig);
                                     }
                                 }, delay);
-                                //PlayerListener.taskIDs.remove(player.getName());
-                                //PlayerListener.taskIDs.put(player.getName(), taskID);
                                 taskIDs.put(player.getName(), taskID);
                             }
                         }else{
@@ -130,23 +118,11 @@ public class CommandWarp implements CommandExecutor {
                                     player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
                                     player.teleport(targetLoc);
                                     Integer configCD2 = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
-                                    //String formatConfig = null;
-                                    //if(configCD2 > 9){
-                                    //    formatConfig = StringUtils.rightPad(configCD2.toString(), 5, "0");
-                                    //}else if(configCD2 < 10){
-                                    //    formatConfig = StringUtils.rightPad(configCD2.toString(), 4, "0");
-                                    //}else if(configCD2 > 99){
-                                    //    formatConfig = StringUtils.rightPad(configCD2.toString(), 6, "0");
-                                    //}
-                                    int k = Integer.valueOf(String.valueOf(configCD2) + String.valueOf("000"));
-                                    //Integer FinalSum =  Integer.parseInt(formatConfig);
+                                    int k = Integer.valueOf(String.valueOf(configCD2) + String.valueOf("000"));;
                                     long systemTime = System.currentTimeMillis() + k;
                                     warpCooldown.put(player.getName(), systemTime);
-                                    //player.sendMessage(formatConfig);
                                 }
                             }, delay);
-                            //PlayerListener.taskIDs.remove(player.getName());
-                            //PlayerListener.taskIDs.put(player.getName(), taskID);
                             taskIDs.put(player.getName(), taskID);
                         }
                     }else{
@@ -178,13 +154,8 @@ public class CommandWarp implements CommandExecutor {
 
                                 player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
                                 player.teleport(targetLoc);
-                                //int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
-                                //Long systemTime = System.currentTimeMillis() + configCD + Integer.parseInt("000");
-                                //warpCooldown.put(player.getName(), systemTime); Not using warp cooldown
                             }
                         }, delay);
-                        //PlayerListener.taskIDs.remove(player.getName());
-                        //PlayerListener.taskIDs.put(player.getName(), taskID);
                         taskIDs.put(player.getName(), taskID);
                     }
                 }
