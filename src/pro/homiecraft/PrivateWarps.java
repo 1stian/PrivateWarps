@@ -34,9 +34,8 @@ public class PrivateWarps extends JavaPlugin {
 
         initMetrics();
 
-
         PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new PlayerListener(), this);
+            pm.registerEvents(new PlayerListener(), this);
 
         getCommands();
     }
@@ -55,7 +54,6 @@ public class PrivateWarps extends JavaPlugin {
     public void initMetrics() {
         try {
             Metrics metrics = new Metrics(this);
-
             metrics.start();
         } catch (IOException e) {
             // Failed to submit the stats :-(
