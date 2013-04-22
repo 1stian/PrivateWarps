@@ -8,14 +8,4 @@
     <artifactId>PrivateWarps</artifactId>
     <version>1.2.1-SNAPSHOT</version>
 
-    <dependencies>
-        <dependency>
-            <groupId>bukkit</groupId>
-            <artifactId>bukkit</artifactId>
-            <version>1.5.1</version>
-            <scope>runtime</scope>
-        </dependency>
-    </dependencies>
-
-    
 </project>
