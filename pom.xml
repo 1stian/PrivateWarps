@@ -4,9 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
+    <groupId>pro.homiecraft</groupId>
     <artifactId>PrivateWarps</artifactId>
     <version>1.2.1-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.5.1</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
 
     
 </project>
