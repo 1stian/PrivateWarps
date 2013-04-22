@@ -43,9 +43,7 @@ public class CommandSWarp implements CommandExecutor {
                         if (sharedList.contains(pName)){
                             int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
 
-                            CommandWarp.pLoc.put(player.getName() + "x", player.getLocation().getX());
-                            CommandWarp.pLoc.put(player.getName() + "y", player.getLocation().getY());
-                            CommandWarp.pLoc.put(player.getName() + "z", player.getLocation().getZ());
+                            CommandWarp.pLoc.put(player.getName(), player.getLocation());
 
                             if (!(configCD == 0)) {
                                 if (CommandWarp.warpCooldown.containsKey(player.getName())) {

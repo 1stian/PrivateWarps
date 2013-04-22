@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class CommandWarp implements CommandExecutor {
 
     static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
-    static HashMap<String, Double> pLoc = new HashMap<String, Double>();
+    static HashMap<String, Location> pLoc = new HashMap<String, Location>();
     static HashMap<String, Long> warpCooldown = new HashMap<String, Long>();
 
     public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args) {
@@ -37,9 +37,10 @@ public class CommandWarp implements CommandExecutor {
                 } else {
                     int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
 
-                    pLoc.put(player.getName() + "x", player.getLocation().getX());
-                    pLoc.put(player.getName() + "y", player.getLocation().getY());
-                    pLoc.put(player.getName() + "z", player.getLocation().getZ());
+                    pLoc.put(player.getName(), player.getLocation());
+                    //pLoc.put(player.getName() + "x", player.getLocation().getX());
+                    //pLoc.put(player.getName() + "y", player.getLocation().getY());
+                    //pLoc.put(player.getName() + "z", player.getLocation().getZ());
 
                     if (!(configCD == 0)) {
                         if (warpCooldown.containsKey(player.getName())) {

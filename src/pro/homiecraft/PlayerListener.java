@@ -1,6 +1,7 @@
 package pro.homiecraft;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -17,7 +18,7 @@ import org.bukkit.scheduler.BukkitScheduler;
  */
 public class PlayerListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.LOW)
     public void onPlayerMove(PlayerMoveEvent e) {
 
         Player player = e.getPlayer();
@@ -29,10 +30,19 @@ public class PlayerListener implements Listener {
         double locY = player.getLocation().getY();
         double locZ = player.getLocation().getZ();
 
-        if (CommandWarp.pLoc.containsKey(player.getName() + "x") || CommandWarp.pLoc.containsKey(player.getName() + "y") || CommandWarp.pLoc.containsKey(player.getName() + "z")) {
-            double plocX = CommandWarp.pLoc.get(player.getName() + "x");
-            double plocY = CommandWarp.pLoc.get(player.getName() + "y");
-            double plocZ = CommandWarp.pLoc.get(player.getName() + "z");
+       // player.sendMessage("1");
+
+        if (CommandWarp.pLoc.containsKey(player.getName())) {
+            //double plocX = CommandWarp.pLoc.get(player.getName() + "x");
+            //double plocY = CommandWarp.pLoc.get(player.getName() + "y");
+            //double plocZ = CommandWarp.pLoc.get(player.getName() + "z");
+
+            Location playerLoc = CommandWarp.pLoc.get(player.getName());
+            double  plocX = playerLoc.getX();
+            double  plocY = playerLoc.getY();
+            double  plocZ = playerLoc.getZ();
+
+            //player.sendMessage("2");
 
             if (!(locX == plocX)) {
                 if (pMove) {
@@ -41,6 +51,8 @@ public class PlayerListener implements Listener {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
+
+                            //player.sendMessage("3");
                         }
                     }
                 }
@@ -53,6 +65,8 @@ public class PlayerListener implements Listener {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
+
+                            //player.sendMessage("3");
                         }
                     }
                 }
@@ -65,6 +79,8 @@ public class PlayerListener implements Listener {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
+
+                            //player.sendMessage("3");
                         }
                     }
                 }

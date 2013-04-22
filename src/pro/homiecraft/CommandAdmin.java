@@ -268,12 +268,12 @@ public class CommandAdmin implements CommandExecutor {
                                     WarpConfig.reloadWarpConfig(pName);
                                 }
 
-                                List<?> shareCheck = WarpConfig.getWarpConfig(pName).getList(warpName + ".Shared");
-                                if (shareCheck.contains(pTarget)) {
+                                ArrayList<String> shareCheck = (ArrayList<String>) WarpConfig.getWarpConfig(pName).getList(warpName + ".Shared");
+                                if (!shareCheck.contains(pTarget)) {
                                     s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName + " is not sharing warp: " + warpName + " with " + pTarget);
                                 } else {
                                     WarpConfig.reloadWarpConfig(pName);
-                                    ArrayList<String> shared = new ArrayList<String>();
+                                    ArrayList<String> shared = (ArrayList<String>) WarpConfig.getWarpConfig(pName).getList(warpName + ".Shared");
                                     shared.remove(pTarget);
 
                                     WarpConfig.getWarpConfig(pName).set(warpName + ".Shared", shared);
@@ -292,5 +292,4 @@ public class CommandAdmin implements CommandExecutor {
         }
         return true;
     }
-
 }
