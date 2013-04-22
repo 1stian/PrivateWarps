@@ -9,6 +9,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -22,7 +24,7 @@ public class CommandAdmin implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args) {
         if (cmd.getName().equalsIgnoreCase("padmin")) {
             if (args.length == 0) {
-                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delwarp|setwarp|warp|listwarps|warplimit|delay|cooldown|cmove");
+                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin delwarp|setwarp|warp|listwarps|warplimit|delay|cooldown|cmove|share");
             } else if (args.length > 1) {
                 if (args[0].equalsIgnoreCase("delwarp")) {
                     if (args.length < 3) {
@@ -216,6 +218,74 @@ public class CommandAdmin implements CommandExecutor {
                         }
                     } else {
                         s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin cmove <true|false>");
+                    }
+                }
+
+                if (args[0].equalsIgnoreCase("share")){
+                    if (args.length < 4){
+                        s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /padmin share add|remove <playerName> <shareToWho> <warpName>");
+                    }else{
+                        String pName = args[2].toLowerCase();
+                        String pTarget = args[3].toLowerCase();
+                        String warpName = args[4].toLowerCase();
+
+                        if (args[1].equalsIgnoreCase("add")){
+                            if (!(WarpConfig.getWarpConfig(pName).getString(warpName) == null)){
+                                WarpConfig.reloadWarpConfig(pName);
+                                if (!WarpConfig.getWarpConfig(pName).contains(warpName + ".Shared")) {
+                                    ArrayList<String> shared = new ArrayList<String>();
+                                    WarpConfig.getWarpConfig(pName).set(warpName + ".Shared", shared);
+                                    WarpConfig.saveWarpConfig(pName);
+                                    WarpConfig.reloadWarpConfig(pName);
+                                }
+
+                                ArrayList<String> shareCheck = (ArrayList<String>) WarpConfig.getWarpConfig(pName).getList(warpName + ".Shared");
+                                if (shareCheck.contains(pTarget)) {
+                                    s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName + " is already sharing warp: " + warpName + " with " + pTarget);
+                                } else {
+                                    WarpConfig.reloadWarpConfig(pName);
+                                    ArrayList<String> shared = new ArrayList<String>();
+                                    shared.add(pTarget);
+
+                                    WarpConfig.getWarpConfig(pName).set(warpName + ".Shared", shared);
+                                    WarpConfig.saveWarpConfig(pName);
+                                    WarpConfig.reloadWarpConfig(pName);
+
+                                    s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName +  " is now sharing warp: " + warpName + " with " + pTarget);
+                                }
+                            }else{
+                                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName + " Does not have a warp named that!");
+                            }
+                        }
+
+                        if (args[1].equalsIgnoreCase("remove")){
+                            if (!(WarpConfig.getWarpConfig(pName).getString(warpName) == null)){
+                                WarpConfig.reloadWarpConfig(pName);
+                                if (!WarpConfig.getWarpConfig(pName).contains(warpName + ".Shared")) {
+                                    ArrayList<String> shared = new ArrayList<String>();
+                                    WarpConfig.getWarpConfig(pName).set(warpName + ".Shared", shared);
+                                    WarpConfig.saveWarpConfig(pName);
+                                    WarpConfig.reloadWarpConfig(pName);
+                                }
+
+                                List<?> shareCheck = WarpConfig.getWarpConfig(pName).getList(warpName + ".Shared");
+                                if (shareCheck.contains(pTarget)) {
+                                    s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName + " is not sharing warp: " + warpName + " with " + pTarget);
+                                } else {
+                                    WarpConfig.reloadWarpConfig(pName);
+                                    ArrayList<String> shared = new ArrayList<String>();
+                                    shared.remove(pTarget);
+
+                                    WarpConfig.getWarpConfig(pName).set(warpName + ".Shared", shared);
+                                    WarpConfig.saveWarpConfig(pName);
+                                    WarpConfig.reloadWarpConfig(pName);
+
+                                    s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName +  " is no longer sharing warp: " + warpName + " with " + pTarget);
+                                }
+                            }else{
+                                s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName + " Does not have a warp named that!");
+                            }
+                        }
                     }
                 }
             }
