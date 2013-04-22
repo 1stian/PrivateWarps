@@ -13,14 +13,13 @@
             <groupId>bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>1.5.1</version>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
     <repositories>
         <repository>
             <id>pro.homiecraft</id>
-            <url>http://homiecraft.pro/maven/</url>
+            <url>localhost/maven/</url>
         </repository>
     </repositories>
 
