@@ -19,7 +19,7 @@
     <repositories>
         <repository>
             <id>pro.homiecraft</id>
-            <url>localhost/maven/</url>
+            <url>46.253.196.160/maven/</url>
         </repository>
     </repositories>
 
