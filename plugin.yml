@@ -1,7 +1,7 @@
 name: PrivateWarps
 version: 1.2.1
 author: GudfareN
-main: pro.homiecraft.PrivateWarps
+main: pro.homiecraft.pw.PrivateWarps
 website: homiecraft.pro
 description: PrivateWarps provides warps for each individual player.
 

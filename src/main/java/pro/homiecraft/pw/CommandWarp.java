@@ -1,4 +1,4 @@
-package pro.homiecraft;
+package pro.homiecraft.pw;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -38,9 +38,6 @@ public class CommandWarp implements CommandExecutor {
                     int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
 
                     pLoc.put(player.getName(), player.getLocation());
-                    //pLoc.put(player.getName() + "x", player.getLocation().getX());
-                    //pLoc.put(player.getName() + "y", player.getLocation().getY());
-                    //pLoc.put(player.getName() + "z", player.getLocation().getZ());
 
                     if (!(configCD == 0)) {
                         if (warpCooldown.containsKey(player.getName())) {

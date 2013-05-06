@@ -1,4 +1,4 @@
-package pro.homiecraft;
+package pro.homiecraft.pw;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -18,6 +18,7 @@ public class CommandListWarps implements CommandExecutor {
     public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args){
         if (cmd.getName().equalsIgnoreCase("pwarps")){
             Player player = (Player) s;
+            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
             String warpList = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getKeys(false).toString();
             String rawList;
             rawList = warpList.replace("count", "");

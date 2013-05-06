@@ -1,4 +1,4 @@
-package pro.homiecraft;
+package pro.homiecraft.pw;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -30,19 +30,12 @@ public class PlayerListener implements Listener {
         double locY = player.getLocation().getY();
         double locZ = player.getLocation().getZ();
 
-       // player.sendMessage("1");
-
         if (CommandWarp.pLoc.containsKey(player.getName())) {
-            //double plocX = CommandWarp.pLoc.get(player.getName() + "x");
-            //double plocY = CommandWarp.pLoc.get(player.getName() + "y");
-            //double plocZ = CommandWarp.pLoc.get(player.getName() + "z");
 
             Location playerLoc = CommandWarp.pLoc.get(player.getName());
             double  plocX = playerLoc.getX();
             double  plocY = playerLoc.getY();
             double  plocZ = playerLoc.getZ();
-
-            //player.sendMessage("2");
 
             if (!(locX == plocX)) {
                 if (pMove) {
@@ -51,8 +44,6 @@ public class PlayerListener implements Listener {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
-
-                            //player.sendMessage("3");
                         }
                     }
                 }
@@ -65,8 +56,6 @@ public class PlayerListener implements Listener {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
-
-                            //player.sendMessage("3");
                         }
                     }
                 }
@@ -79,8 +68,6 @@ public class PlayerListener implements Listener {
                             task.cancelTask(CommandWarp.taskIDs.get(player.getName()));
                             CommandWarp.taskIDs.remove(player.getName());
                             player.sendMessage(ChatColor.DARK_GRAY + "You moved! Warp canceled!");
-
-                            //player.sendMessage("3");
                         }
                     }
                 }
