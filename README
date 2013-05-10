@@ -1,1 +1,61 @@
-This file was created by IntelliJ IDEA 12.1 for binding GitHub repository
+**Name:** PrivateWarps
+
+**Author:** GudfareN
+
+**__Description:__**
+PrivateWarps is a warp(teleportation) plugin that gives each individual players their own private warps. With a configurable max allowed warp setting... So you can limit how many warps a player can have... As admin. you can add more warps for a player. If they have reached their limit. And delete, warp to and list them.
+And it is fully configurable from in-game(Well there is not much to really configure.. Only the max warps allowed).
+
+**__Commands / Permissions / Description__**
+|=Commands|=Permission|=Description|
+|/pwarp|privatewarps.warp|Warps you to a specified warp!
+|/psetwarp|privatewarps.setwarp|Sets a warp at your location with the name you specify!
+|/pdelwarp|privatewarps.delwarp|Deletes the warp you name!
+|/pwarps|privatewarps.listwarps|List all warps available for you!
+|/padmin|privatewarps.admin|Will show you what admin commands that is available!
+
+**__Information about the /padmin command:__**
+|=Padmin command|=Description|
+|/padmin warp <playerName> <WarpName>|This will warp you to the specified warp for the specified player!
+|/padmin setwarp <playerName> <WarpName>|Will add a warp for the specified player!(Overrides maximum allowed warps)
+|/padmin delwarp <playerName> <WarpName>|Will delete a warp for the specified player!
+|/padmin listwarps <playername>|Will list all warps that the specified player has!
+|/padmin warplimit <number>|Will change the maximum allowed warps for every player!
+|/padmin delay <number>|Will change the warp delay!
+|/padmin cooldown <number>|Will change the cooldown before you can warp again!
+|/padmin cmove <true or false>|Changes the cancel warp on move setting!
+
+**__Plugin config.yml__**
+<<code>>
+PrivateWarps:
+  Warps:
+    Maximum-Allowed-Warps: 3
+    Warp-Delay: 0 (Seconds -- Keep this at 0 if you want it disabled!)
+    Warp-Cooldown: 0 (Seconds -- Keep this at 0 if you want it disabled!)
+  settings:
+    Cancel-Warp-On-Player-Move: true (Cancels the warp if the player moves... A warp delay has to be set.. For this to work)
+<</code>>
+
+**__Plugin plugin.yml - Commands:__**
+<<code>>
+    padmin:
+        aliases: pa
+        permission: PrivateWarps.admin
+        description: Admin commands for PrivateWarps. Type /padmin to see the options
+    pwarp:
+        aliases: pw
+        permission: PrivateWarps.warp
+        description: Warps you to the specified warp if it exist!
+    psetwarp:
+        aliases: pset
+        permission: PrivateWarps.setwarp
+        description: Sets a private warp
+    pdelwarp:
+        aliases: pdel
+        permission: PrivateWarps.delwarp
+        description: Deletes a warp that you specify!
+    pwarps:
+        aliases: plist
+        permission: PrivateWarps.listwarps
+        description: List all warps available for you!
+<</code>>
