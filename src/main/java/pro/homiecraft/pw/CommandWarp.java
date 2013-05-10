@@ -28,7 +28,7 @@ public class CommandWarp implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("pwarp")) {
             final Player player = (Player) s;
             PrivateWarps.pluginST.reloadConfig();
-            int rawdelay = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Delay");
+            Integer rawdelay = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Delay");
             final int delay = rawdelay * 20;
             if (args.length == 1) {
                 final String warpName = args[0].toLowerCase();
@@ -46,9 +46,9 @@ public class CommandWarp implements CommandExecutor {
                                 //int seconds = (int) (timeLeft / 1000) % 100 ;
                                 double seconds = (int) (timeLeft / 1000);
                                 String SoonToBeDone = Double.valueOf(seconds).toString();
-                                String[] SoontimeLeft = SoonToBeDone.split(",");
-                                String StimeLeft = SoontimeLeft[0];
-                                player.sendMessage(ChatColor.DARK_GRAY + "Warp is on cooldown! You have to wait: " + StimeLeft + " seconds more!");
+                                //String[] SoontimeLeft = SoonToBeDone.split(".");
+                                //String StimeLeft = SoontimeLeft[0];
+                                player.sendMessage(ChatColor.DARK_GRAY + "Warp is on cooldown! You have to wait: " + SoonToBeDone + " seconds more!");
                             } else {
                                 if (!(rawdelay == 0)) {
                                     player.sendMessage(ChatColor.DARK_GRAY + "Warping in: " + rawdelay + " seconds");

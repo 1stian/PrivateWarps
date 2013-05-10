@@ -23,6 +23,8 @@ public class CommandSetWarp implements CommandExecutor {
                 World cWorld = player.getWorld();
                 String warpName = args[0].toLowerCase();
 
+
+                WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
                 if (WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null){
                     if (s.hasPermission("PrivateWarps.unlimited")){
                         double xLoc = player.getLocation().getX();
@@ -30,9 +32,6 @@ public class CommandSetWarp implements CommandExecutor {
                         double zLoc = player.getLocation().getZ();
                         float yaw = player.getLocation().getYaw();
                         float pitch = player.getLocation().getPitch();
-
-
-                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 
                         int count = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getInt("count");
                         count++;
