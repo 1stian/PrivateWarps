@@ -1,4 +1,4 @@
-package pro.homiecraft;
+package pro.homiecraft.pw;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,38 +21,41 @@ import java.util.HashMap;
 public class CommandWarp implements CommandExecutor {
 
     static HashMap<String, Integer> taskIDs = new HashMap<String, Integer>();
+    static HashMap<String, Location> pLoc = new HashMap<String, Location>();
+    static HashMap<String, Long> warpCooldown = new HashMap<String, Long>();
 
-    HashMap<String, Long> warpCooldown = new HashMap<String, Long>();
-
-    public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args){
-        if (cmd.getName().equalsIgnoreCase("pwarp")){
+    public boolean onCommand(CommandSender s, Command cmd, String commandLabel, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("pwarp")) {
             final Player player = (Player) s;
             PrivateWarps.pluginST.reloadConfig();
-            int rawdelay = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Delay");
+            Integer rawdelay = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Delay");
             final int delay = rawdelay * 20;
-            if (args.length == 1){
+            if (args.length == 1) {
                 final String warpName = args[0].toLowerCase();
-                if(WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null){
+                if (WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null) {
                     s.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Warp does not exist!");
-                }else{
+                } else {
                     int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
-                    if (!(configCD == 0)){
-                        if(warpCooldown.containsKey(player.getName())){
-                            if(System.currentTimeMillis() < warpCooldown.get(player.getName())){
+
+                    pLoc.put(player.getName(), player.getLocation());
+
+                    if (!(configCD == 0)) {
+                        if (warpCooldown.containsKey(player.getName())) {
+                            if (System.currentTimeMillis() < warpCooldown.get(player.getName())) {
                                 Long timeLeft = warpCooldown.get(player.getName()) - System.currentTimeMillis();
                                 //int seconds = (int) (timeLeft / 1000) % 100 ;
                                 double seconds = (int) (timeLeft / 1000);
                                 String SoonToBeDone = Double.valueOf(seconds).toString();
-                                String[] SoontimeLeft = SoonToBeDone.split(",");
-                                String StimeLeft = SoontimeLeft[0];
-                                player.sendMessage(ChatColor.DARK_GRAY + "Warp is on cooldown! You have to wait: " + StimeLeft + " seconds more!");
-                            }else{
-                                if (!(rawdelay == 0)){
+                                //String[] SoontimeLeft = SoonToBeDone.split(".");
+                                //String StimeLeft = SoontimeLeft[0];
+                                player.sendMessage(ChatColor.DARK_GRAY + "Warp is on cooldown! You have to wait: " + SoonToBeDone + " seconds more!");
+                            } else {
+                                if (!(rawdelay == 0)) {
                                     player.sendMessage(ChatColor.DARK_GRAY + "Warping in: " + rawdelay + " seconds");
                                 }
                                 BukkitScheduler task = PrivateWarps.pluginST.getServer().getScheduler();
-                                if(taskIDs.containsKey(player.getName())){
-                                    if(task.isQueued(taskIDs.get(player.getName()))){
+                                if (taskIDs.containsKey(player.getName())) {
+                                    if (task.isQueued(taskIDs.get(player.getName()))) {
                                         task.cancelTask(taskIDs.get(player.getName()));
                                     }
                                 }
@@ -76,32 +79,20 @@ public class CommandWarp implements CommandExecutor {
                                         player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
                                         player.teleport(targetLoc);
                                         Integer configCD2 = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
-                                        //String formatConfig = null;
-                                        //if(configCD2 > 9){
-                                        //    formatConfig = StringUtils.rightPad(configCD2.toString(), 5, "0");
-                                        //}else if(configCD2 < 10){
-                                        //    formatConfig = StringUtils.rightPad(configCD2.toString(), 4, "0");
-                                        //}else if(configCD2 > 99){
-                                        //    formatConfig = StringUtils.rightPad(configCD2.toString(), 6, "0");
-                                        //}
                                         int k = Integer.valueOf(String.valueOf(configCD2) + String.valueOf("000"));
-                                        //Integer FinalSum =  Integer.parseInt(formatConfig);
                                         long systemTime = System.currentTimeMillis() + k;
                                         warpCooldown.put(player.getName(), systemTime);
-                                        //player.sendMessage(formatConfig);
                                     }
                                 }, delay);
-                                //PlayerListener.taskIDs.remove(player.getName());
-                                //PlayerListener.taskIDs.put(player.getName(), taskID);
                                 taskIDs.put(player.getName(), taskID);
                             }
-                        }else{
-                            if (!(rawdelay == 0)){
+                        } else {
+                            if (!(rawdelay == 0)) {
                                 player.sendMessage(ChatColor.DARK_GRAY + "Warping in: " + rawdelay + " seconds");
                             }
                             BukkitScheduler task = PrivateWarps.pluginST.getServer().getScheduler();
-                            if(taskIDs.containsKey(player.getName())){
-                                if(task.isQueued(taskIDs.get(player.getName()))){
+                            if (taskIDs.containsKey(player.getName())) {
+                                if (task.isQueued(taskIDs.get(player.getName()))) {
                                     task.cancelTask(taskIDs.get(player.getName()));
                                 }
                             }
@@ -125,32 +116,21 @@ public class CommandWarp implements CommandExecutor {
                                     player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
                                     player.teleport(targetLoc);
                                     Integer configCD2 = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
-                                    //String formatConfig = null;
-                                    //if(configCD2 > 9){
-                                    //    formatConfig = StringUtils.rightPad(configCD2.toString(), 5, "0");
-                                    //}else if(configCD2 < 10){
-                                    //    formatConfig = StringUtils.rightPad(configCD2.toString(), 4, "0");
-                                    //}else if(configCD2 > 99){
-                                    //    formatConfig = StringUtils.rightPad(configCD2.toString(), 6, "0");
-                                    //}
                                     int k = Integer.valueOf(String.valueOf(configCD2) + String.valueOf("000"));
-                                    //Integer FinalSum =  Integer.parseInt(formatConfig);
+                                    ;
                                     long systemTime = System.currentTimeMillis() + k;
                                     warpCooldown.put(player.getName(), systemTime);
-                                    //player.sendMessage(formatConfig);
                                 }
                             }, delay);
-                            //PlayerListener.taskIDs.remove(player.getName());
-                            //PlayerListener.taskIDs.put(player.getName(), taskID);
                             taskIDs.put(player.getName(), taskID);
                         }
-                    }else{
-                        if (!(rawdelay == 0)){
+                    } else {
+                        if (!(rawdelay == 0)) {
                             player.sendMessage(ChatColor.DARK_GRAY + "Warping in: " + rawdelay + " seconds");
                         }
                         BukkitScheduler task = PrivateWarps.pluginST.getServer().getScheduler();
-                        if(taskIDs.containsKey(player.getName())){
-                            if(task.isQueued(taskIDs.get(player.getName()))){
+                        if (taskIDs.containsKey(player.getName())) {
+                            if (task.isQueued(taskIDs.get(player.getName()))) {
                                 task.cancelTask(taskIDs.get(player.getName()));
                             }
                         }
@@ -173,17 +153,12 @@ public class CommandWarp implements CommandExecutor {
 
                                 player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
                                 player.teleport(targetLoc);
-                                //int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
-                                //Long systemTime = System.currentTimeMillis() + configCD + Integer.parseInt("000");
-                                //warpCooldown.put(player.getName(), systemTime); Not using warp cooldown
                             }
                         }, delay);
-                        //PlayerListener.taskIDs.remove(player.getName());
-                        //PlayerListener.taskIDs.put(player.getName(), taskID);
                         taskIDs.put(player.getName(), taskID);
                     }
                 }
-            }else{
+            } else {
                 player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " Usage: /pwarp WarpName");
             }
         }

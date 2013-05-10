@@ -1,4 +1,4 @@
-package pro.homiecraft;
+package pro.homiecraft.pw;
 
 
 import org.bukkit.ChatColor;

@@ -1,4 +1,4 @@
-package pro.homiecraft;
+package pro.homiecraft.pw;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

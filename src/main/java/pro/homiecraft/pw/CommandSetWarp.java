@@ -1,4 +1,4 @@
-package pro.homiecraft;
+package pro.homiecraft.pw;
 
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -23,6 +23,8 @@ public class CommandSetWarp implements CommandExecutor {
                 World cWorld = player.getWorld();
                 String warpName = args[0].toLowerCase();
 
+
+                WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
                 if (WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null){
                     if (s.hasPermission("PrivateWarps.unlimited")){
                         double xLoc = player.getLocation().getX();
@@ -31,10 +33,6 @@ public class CommandSetWarp implements CommandExecutor {
                         float yaw = player.getLocation().getYaw();
                         float pitch = player.getLocation().getPitch();
 
-                        //Location warp = new Location(cWorld,xLoc, yLoc, zLoc, yaw, pitch);
-
-                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-
                         int count = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getInt("count");
                         count++;
 
@@ -42,7 +40,8 @@ public class CommandSetWarp implements CommandExecutor {
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".y", yLoc);
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".z", zLoc);
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".yaw", yaw);
-                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".pitch", pitch);
+                  WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".pitch", pitch);
+                        WarpConfig.getWarpConfig(player.getName().toLowerCase()).set(warpName + ".world", player.getWorld().getName());
                         WarpConfig.getWarpConfig(player.getName().toLowerCase()).set("count", count);
                         WarpConfig.saveWarpConfig(player.getName().toLowerCase());
                         WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
@@ -60,7 +59,6 @@ public class CommandSetWarp implements CommandExecutor {
                             float yaw = player.getLocation().getYaw();
                             float pitch = player.getLocation().getPitch();
 
-                            //Location warp = new Location(cWorld,xLoc, yLoc, zLoc, yaw, pitch);
 
                             WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
 

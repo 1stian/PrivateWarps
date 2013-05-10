@@ -1,0 +1,7 @@
+PrivateWarps:
+  Warps:
+    Maximum-Allowed-Warps: 3
+    Warp-Delay: 0
+    Warp-Cooldown: 0
+  settings:
+    Cancel-Warp-On-Player-Move: true
