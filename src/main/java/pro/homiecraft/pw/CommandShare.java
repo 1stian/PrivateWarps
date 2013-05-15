@@ -27,6 +27,7 @@ public class CommandShare implements CommandExecutor {
                     String warpName = args[2].toLowerCase();
                     String pName = args[1].toLowerCase();
 
+                    WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
                     if (!(WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null)){
                         if (!WarpConfig.getWarpConfig(player.getName().toLowerCase()).contains(warpName + ".Shared")) {
                             ArrayList<String> shared = new ArrayList<String>();
@@ -58,6 +59,7 @@ public class CommandShare implements CommandExecutor {
                     String warpName = args[2].toLowerCase();
                     String pName = args[1].toLowerCase();
 
+                    WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
                     if (!(WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null)){
                         if (!WarpConfig.getWarpConfig(player.getName().toLowerCase()).contains(warpName + ".Shared")) {
                             ArrayList<String> shared = new ArrayList<String>();

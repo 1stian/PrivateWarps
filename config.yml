@@ -5,3 +5,4 @@ PrivateWarps:
     Warp-Cooldown: 0
   settings:
     Cancel-Warp-On-Player-Move: true
+    List-Shared-Warps-To-Players: true
