@@ -37,7 +37,12 @@ public class CommandListWarps implements CommandExecutor {
                 File dir = new File(PrivateWarps.pluginST.getDataFolder() + "/data/");
                 for(File fs : dir.listFiles()){
                     String sfs = fs.toString();
-                    String[] fileName = sfs.split("\\\\");
+                    String[] fileName = null;
+                    if (sfs.contains("/")){
+                        fileName = sfs.split("/");
+                    }else{
+                        fileName = sfs.split("\\\\");
+                    }
                     String playerFile = fileName[3].toLowerCase();
                     String[] ArrplayerName = playerFile.split("\\.");
                     String playerName = ArrplayerName[0];

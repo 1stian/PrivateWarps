@@ -1,5 +1,5 @@
 name: PrivateWarps
-version: 1.2.3
+version: 1.3.1
 author: GudfareN
 main: pro.homiecraft.pw.PrivateWarps
 website: homiecraft.pro
@@ -36,3 +36,7 @@ commands:
         aliases: ps
         permission: PrivateWarps.share
         description: Allows you to share one of your warps to another player!
+    pwarpinfo:
+        aliases: pwi
+        permission: PrivateWarps.warp.info
+        description: Gives you information about a warp. Like location etc.

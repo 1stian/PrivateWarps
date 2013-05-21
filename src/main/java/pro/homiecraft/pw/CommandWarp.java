@@ -2,6 +2,7 @@ package pro.homiecraft.pw;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,6 +31,7 @@ public class CommandWarp implements CommandExecutor {
             PrivateWarps.pluginST.reloadConfig();
             Integer rawdelay = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Delay");
             final int delay = rawdelay * 20;
+            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
             if (args.length == 1) {
                 final String warpName = args[0].toLowerCase();
                 if (WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName) == null) {
@@ -62,22 +64,7 @@ public class CommandWarp implements CommandExecutor {
                                 int taskID = PrivateWarps.pluginST.getServer().getScheduler().scheduleSyncDelayedTask(PrivateWarps.pluginST, new Runnable() {
 
                                     public void run() {
-                                        WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-                                        double xLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".x");
-                                        double yLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".y");
-                                        double zLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".z");
-
-                                        String yaw = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".yaw");
-                                        String pitch = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".pitch");
-                                        String world = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".world");
-
-                                        Float fYaw = Float.parseFloat(yaw);
-                                        Float fPitch = Float.parseFloat(pitch);
-
-                                        Location targetLoc = new Location(Bukkit.getWorld(world), xLoc, yLoc, zLoc, fYaw, fPitch);
-
-                                        player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
-                                        player.teleport(targetLoc);
+                                        tpPlayer(player.getName().toLowerCase(), warpName);
                                         Integer configCD2 = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
                                         int k = Integer.valueOf(String.valueOf(configCD2) + String.valueOf("000"));
                                         long systemTime = System.currentTimeMillis() + k;
@@ -99,22 +86,7 @@ public class CommandWarp implements CommandExecutor {
                             int taskID = PrivateWarps.pluginST.getServer().getScheduler().scheduleSyncDelayedTask(PrivateWarps.pluginST, new Runnable() {
 
                                 public void run() {
-                                    WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-                                    double xLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".x");
-                                    double yLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".y");
-                                    double zLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".z");
-
-                                    String yaw = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".yaw");
-                                    String pitch = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".pitch");
-                                    String world = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".world");
-
-                                    Float fYaw = Float.parseFloat(yaw);
-                                    Float fPitch = Float.parseFloat(pitch);
-
-                                    Location targetLoc = new Location(Bukkit.getWorld(world), xLoc, yLoc, zLoc, fYaw, fPitch);
-
-                                    player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
-                                    player.teleport(targetLoc);
+                                    tpPlayer(player.getName().toLowerCase(), warpName);
                                     Integer configCD2 = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
                                     int k = Integer.valueOf(String.valueOf(configCD2) + String.valueOf("000"));
                                     ;
@@ -137,22 +109,7 @@ public class CommandWarp implements CommandExecutor {
                         int taskID = PrivateWarps.pluginST.getServer().getScheduler().scheduleSyncDelayedTask(PrivateWarps.pluginST, new Runnable() {
 
                             public void run() {
-                                WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
-                                double xLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".x");
-                                double yLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".y");
-                                double zLoc = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getDouble(warpName + ".z");
-
-                                String yaw = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".yaw");
-                                String pitch = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".pitch");
-                                String world = WarpConfig.getWarpConfig(player.getName().toLowerCase()).getString(warpName + ".world");
-
-                                Float fYaw = Float.parseFloat(yaw);
-                                Float fPitch = Float.parseFloat(pitch);
-
-                                Location targetLoc = new Location(Bukkit.getWorld(world), xLoc, yLoc, zLoc, fYaw, fPitch);
-
-                                player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
-                                player.teleport(targetLoc);
+                                tpPlayer(player.getName().toLowerCase(), warpName);
                             }
                         }, delay);
                         taskIDs.put(player.getName(), taskID);
@@ -163,5 +120,37 @@ public class CommandWarp implements CommandExecutor {
             }
         }
         return true;
+    }
+
+    public void loadDestChunk(Location destChunk){
+          Chunk c = destChunk.getChunk();
+        if(!c.isLoaded()){
+            c.load();
+        }
+    }
+
+    public void tpPlayer(String pName, String warpNameRaw){
+        String pl = pName.toLowerCase();
+        String warpName = warpNameRaw.toLowerCase();
+        Player player = Bukkit.getPlayer(pl);
+
+        WarpConfig.reloadWarpConfig(pl);
+        double xLoc = WarpConfig.getWarpConfig(pl).getDouble(warpName + ".x");
+        double yLoc = WarpConfig.getWarpConfig(pl).getDouble(warpName + ".y");
+        double zLoc = WarpConfig.getWarpConfig(pl).getDouble(warpName + ".z");
+
+        String yaw = WarpConfig.getWarpConfig(pl).getString(warpName + ".yaw");
+        String pitch = WarpConfig.getWarpConfig(pl).getString(warpName + ".pitch");
+        String world = WarpConfig.getWarpConfig(pl).getString(warpName + ".world");
+
+        Float fYaw = Float.parseFloat(yaw);
+        Float fPitch = Float.parseFloat(pitch);
+
+        Location targetLoc = new Location(Bukkit.getWorld(world), xLoc, yLoc, zLoc, fYaw, fPitch);
+
+        loadDestChunk(targetLoc);
+
+        player.sendMessage(ChatColor.DARK_GRAY + "Warping...");
+        player.teleport(targetLoc);
     }
 }

@@ -40,7 +40,7 @@ public class CommandSWarp implements CommandExecutor {
                         player.sendMessage(ChatColor.AQUA + "[" + ChatColor.GREEN + "PrivateWarps" + ChatColor.AQUA + "]" + ChatColor.WHITE + " " + pName + " is not sharing warp: " + warpName + " with you!");
                     }else{
                         List<?> sharedList = WarpConfig.getWarpConfig(pName).getList(warpName + ".Shared");
-                        if (sharedList.contains(pName)){
+                        if (sharedList.contains(player.getName().toLowerCase())){
                             int configCD = PrivateWarps.pluginST.getConfig().getInt("PrivateWarps.Warps.Warp-Cooldown");
 
                             CommandWarp.pLoc.put(player.getName(), player.getLocation());
@@ -104,7 +104,7 @@ public class CommandSWarp implements CommandExecutor {
                                     int taskID = PrivateWarps.pluginST.getServer().getScheduler().scheduleSyncDelayedTask(PrivateWarps.pluginST, new Runnable() {
 
                                         public void run() {
-                                            WarpConfig.reloadWarpConfig(player.getName().toLowerCase());
+                                            WarpConfig.reloadWarpConfig(pName);
                                             double xLoc = WarpConfig.getWarpConfig(pName).getDouble(warpName + ".x");
                                             double yLoc = WarpConfig.getWarpConfig(pName).getDouble(warpName + ".y");
                                             double zLoc = WarpConfig.getWarpConfig(pName).getDouble(warpName + ".z");
